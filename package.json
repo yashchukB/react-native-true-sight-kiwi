@@ -20,7 +20,8 @@
     "test": "jest",
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "prepublishOnly": "tsc"
+    "prepublishOnly": "tsc",
+    "postinstall": "yarn build"
   },
   "peerDependencies": {
     "@react-native-community/slider": "^3.0.3",
