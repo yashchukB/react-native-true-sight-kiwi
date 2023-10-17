@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yashchukB/react-native-true-sight-kiwi.git"
+    "url": "https://github.com/yashchukB/react-native-true-sight.git"
   },
   "bugs": {
-    "url": "https://github.com/yashchukB/react-native-true-sight-kiwi/issues"
+    "url": "https://github.com/yashchukB/react-native-true-sight/issues"
   },
   "main": "build/index.js",
   "types": "build/index.d.ts",
