@@ -8,6 +8,7 @@ import {
 import Video from "react-native-video";
 import { useVideoState } from "../hooks/useVideoState";
 import { InjectedControlProps, InjectedPlayerProps } from "../types";
+import { PlayerLoader } from "./PlayerLoader";
 
 interface PlayerProps {
   autoStart: boolean;
@@ -26,7 +27,10 @@ export const VideoPlayer: React.FC<PlayerProps> = (props) => {
   const controlsHider = useRef(0);
   const controlsFadeValue = useRef(new Animated.Value(1)).current;
   const {
+    videoLoading,
     videoPaused,
+    setVideoLoading,
+    setVideoNotLoading,
     setVideoPlaying,
     setVideoPaused,
   } = useVideoState(props.autoStart);
@@ -41,17 +45,24 @@ export const VideoPlayer: React.FC<PlayerProps> = (props) => {
   };
 
   function onLoad(meta: { duration: number }) {
+    setVideoNotLoading();
     setVideoTotalTime(Math.floor(meta.duration));
   }
 
   function onProgress(meta: ProgressStatus) {
     if (meta.currentTime !== playCursorTime) {
       setPlayCursorTime(Math.floor(meta.currentTime));
+
+      // Update loading state
+      meta.currentTime >= meta.playableDuration
+        ? setVideoLoading()
+        : setVideoNotLoading();
     }
   }
 
   function onEnd() {
     // Pause video and reset
+    setVideoNotLoading();
     setCursorPosition(0);
 
     // Defer to prevent a glitch on iOS where repeat if video paused to late after cursor, it doesnt pause
@@ -98,7 +109,7 @@ export const VideoPlayer: React.FC<PlayerProps> = (props) => {
     <TouchableWithoutFeedback onPress={toggleControls}>
       <View style={styles.wrapper}>
         <View style={styles.loaderWrapper} pointerEvents="none">
-          
+          {videoLoading ? <PlayerLoader /> : null}
         </View>
         <Animated.View
           style={[styles.controls, { opacity: controlsFadeValue }]}
@@ -107,6 +118,7 @@ export const VideoPlayer: React.FC<PlayerProps> = (props) => {
           <View style={styles.middleControlsBar}>
             {props.mainControl({
               videoPaused,
+              videoLoading,
               playCursorTime,
               videoTotalTime,
               setPlaying: setVideoPlaying,
@@ -117,6 +129,7 @@ export const VideoPlayer: React.FC<PlayerProps> = (props) => {
           <View style={styles.bottomControlsBar}>
             {props.bottomControl({
               videoPaused,
+              videoLoading,
               playCursorTime,
               videoTotalTime,
               setPlaying: setVideoPlaying,
