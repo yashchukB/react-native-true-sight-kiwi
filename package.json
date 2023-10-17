@@ -1,18 +1,18 @@
 {
-  "name": "react-native-true-sight",
+  "name": "react-native-true-sight-kiwi",
   "description": "A cross-platform video player with customizable controls for React Native.",
   "version": "2.0.0",
   "license": "MIT",
   "author": {
-    "name": "Andréas HANSS",
-    "url": "https://www.linkedin.com/in/andreas-hanss/"
+    "name": "Bohdan Yashchuk",
+    "url": "https://www.linkedin.com/in/bohdan-yashchuk-4585b8167/"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ScreamZ/react-native-true-sight.git"
+    "url": "https://github.com/yashchukB/react-native-true-sight-kiwi.git"
   },
   "bugs": {
-    "url": "https://github.com/ScreamZ/react-native-true-sight/issues"
+    "url": "https://github.com/yashchukB/react-native-true-sight-kiwi/issues"
   },
   "main": "build/index.js",
   "types": "build/index.d.ts",
