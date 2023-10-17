@@ -21,7 +21,7 @@
     "build": "tsc",
     "build:watch": "tsc --watch",
     "prepublishOnly": "tsc",
-    "postinstall": "npm run build"
+    "postinstall": "tsc"
   },
   "peerDependencies": {
     "@react-native-community/slider": "^3.0.3",
